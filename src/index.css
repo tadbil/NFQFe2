@@ -103,21 +103,16 @@ body {
   font-weight: bold;
 }
 
-.card__like {
-  width: 50px;
+.card__like{
   display: inline-block;
-  float: left;
-  margin: 0 auto;
-  color: #ff6c80;
+  color: #ff2447;
   font-size: 26px;
-}
-
-.card__like i {
   transition: transform 0.23s ease-in-out;
 }
 
-.card__like i:hover {
-   transform: scale(1.4);
+.card__like i:hover:before {
+   content: "\f004";
+   color: #ff000a;
 }
 
 .card__subtitle {

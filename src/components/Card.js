@@ -6,6 +6,7 @@ class Card extends React.Component {
 
         this.state = {
             isDescription: false,
+            likedMovies: JSON.parse(localStorage.getItem('liked')) || [] //Liked movies list
         }
     }
 
@@ -13,6 +14,24 @@ class Card extends React.Component {
         this.setState({
             isDescription: !this.state.isDescription,
         })
+    }
+
+    toggleLike = movie => {
+       if(this.state.likedMovies.includes(movie)) {
+           this.setState({
+               likedMovies: this.state.likedMovies.filter(function (liked){
+                    return liked !== movie;
+               })
+           }, () => {
+               localStorage.setItem('liked', JSON.stringify(this.state.likedMovies));
+           });
+
+       } else {
+           this.setState({
+               likedMovies: this.state.likedMovies.concat(movie)
+           }, () =>
+           localStorage.setItem('liked', JSON.stringify(this.state.likedMovies)))
+       }
     }
 
     render() {
@@ -32,7 +51,7 @@ class Card extends React.Component {
                 </div>
 
                 <div className="card__like">
-                    <i className="fa fa-heart-o"/>
+                        <i onClick={() => this.toggleLike(title)} className={this.state.likedMovies.includes(title) ? 'fa fa-heart' : 'fa fa-heart-o'}/>
                 </div>
 
                 <div className="card__subtitle">
